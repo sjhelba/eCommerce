@@ -1,0 +1,33 @@
+#homePage {
+  background-color: $backgroundColor;
+  height: 100vh;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  #welcome {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    width: 600px;
+    height: 600px;
+    background-image: url('/img/boxBG.jpg');
+    background-size: cover;
+    filter: opacity(60%);
+  }
+
+  }
+  #description {
+    font-size: 18px;
+    position: absolute;
+    text-align: center;
+    padding-top: 675px;
+    height: 20px;
+    filter: opacity(60%);
+}
+
+

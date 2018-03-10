@@ -1,0 +1,15 @@
+#nextSidebar, #prevSidebar {
+  display: inline;
+  #nextBtn, #prevBtn {
+    margin: 20px;
+    background-color: rgba(85, 85, 85, 0.856);
+    color: white;
+    &:hover {
+    background-color: rgb(85, 85, 85);
+    font-size: 12px;
+    }
+  }
+}
+
+
+

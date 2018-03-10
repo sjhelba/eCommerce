@@ -1,0 +1,26 @@
+@import './colors.scss';    //Color variables
+@import './normalize.css';  //Reset to default styling
+@import './skeleton.css';
+@import './navbar.scss';    //Styling for navbar
+@import './buildbox.scss';  //Styling for buildbox page
+@import './nav.scss'; //Styling for Next and Prev buttons
+@import './signup.scss';    //SignUp page
+@import './admin.scss';
+@import './home.scss';
+@import './checkout.scss';
+@import './cart.scss';
+@import './details.scss';   //Styling for product detail page
+@import './ordersComplete.scss';   //Styling for order completion page
+@import './categoryList.scss'; //Styling for category list
+@import './pay.scss'; //Styling for pay page
+
+body {
+  background-color: $backgroundColor;
+}
+
+.categoryList a {
+  text-decoration: none;
+  display: inline-block;
+  margin: 0 20px;
+}
+
