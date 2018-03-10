@@ -15,10 +15,35 @@
     border-radius: 50%;
     width: 600px;
     height: 600px;
-    background-image: url('/img/boxBG.jpg');
-    background-size: cover;
-    filter: opacity(60%);
+
   }
+#background {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  width: 600px;
+  height: 600px;
+  background-image: url('/img/boxBG.jpg');
+  background-size: cover;
+  filter: opacity(60%);
+}
+
+  #title {
+    font-size: 84px;
+    color: rgb(72, 65, 65);
+    font-weight: bold;
+    opacity: 0.85;
+  }
+  #tagline {
+    color: rgb(220, 97, 4);
+    font-weight: bold;
+    font-size: 30px;
+  }
+
+
 
   }
   #description {

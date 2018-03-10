@@ -1,0 +1,4 @@
+-work on seed file
+-work on sequelize models according to schema
+-test out home page
+-write out front end

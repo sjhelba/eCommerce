@@ -1,22 +1,9 @@
 const router = require('express').Router()
-const HttpError = require('./HttpError');
 const {Product, Category} = require('../db/models')
+const {adminGatekeeper} = require('./gatekeepers')
+
 module.exports = router
 
-//The 'HttpError' function generates errors in the console, something to come back
-//if we decided that there's value in this and time allowing
-
-//If product requrest is made with an id, check if product id matches to a valid product in DB
-// router.param('id', function (req, res, next, id) {
-//   Product.findById(id)
-//   .then(function (product) {
-//     if (!product) throw HttpError(404);
-//     req.product = product;
-//     next();
-//     return null;
-//   })
-//   .catch(next);
-// });
 
 // GET /api/products/
 // res.json array of products objects
@@ -41,3 +28,14 @@ router.get('/:id', (req, res, next) => {
   .catch((err) => console.error(err));
 })
 
+router.post('/', adminGatekeeper, (req, res, next) => {
+  Product.create(req.body)
+  .then(res.json.bind(res))
+  .catch((err) => console.error(err));
+})
+
+router.put('/:id', adminGatekeeper, (req, res, next) => {
+  Product.update(req.body)
+  .then(res.json.bind(res))
+  .catch((err) => console.error(err));
+})

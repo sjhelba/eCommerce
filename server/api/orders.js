@@ -1,9 +1,12 @@
 const router = require('express').Router()
 const {Order} = require('../db/models')
+const {adminGatekeeper} = require('./gatekeepers')
 module.exports = router
 
+
+
 // GET /api/orders/
-router.get('/', (req, res, next) => {
+router.get('/', adminGatekeeper, (req, res, next) => {  //must be admin
   Order.findAll()
   .then(categories => {
     res.json(categories)

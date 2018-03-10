@@ -1,30 +1,29 @@
 const router = require('express').Router()
-const User = require('../db/models/user')
+const {adminGatekeeper} = require('../api/gatekeepers')
+const Admin = require('../db/models/admin')
 module.exports = router
 
 router.post('/login', (req, res, next) => {
-  User.findOne({where: {email: req.body.email}})
-    .then(user => {
-      if (!user) {
-        res.status(401).send('User not found')
-      } else if (!user.correctPassword(req.body.password)) {
-        res.status(401).send('Incorrect password')
+  Admin.findOne({where: {username: req.body.username}})
+    .then(admin => {
+      if (!admin || !admin.correctPassword(req.body.password)) {
+        res.status(401).send('No admin found with given credentials')
       } else {
-        req.login(user, err => err ? next(err) : res.json(user))
+        req.login(admin, err => err ? next(err) : res.json(admin))
       }
     })
     .catch(next)
 })
 
-router.post('/signup', (req, res, next) => {
-  User.create(req.body)
-    .then(user => {
-      req.login(user, err => err ? next(err) : res.json(user))
+router.post('/newAdmin', adminGatekeeper, (req, res, next) => {
+  Admin.create(req.body)
+    .then(admin => {
+      res.json(admin)
     })
     .catch(err => {
-      if (err.name === 'SequelizeUniqueConstraintError')
+      if (err.name === 'SequelizeUniqueConstraintError') {
         res.status(401).send('User already exists')
-      else next(err)
+      } else {next(err)}
     })
 })
 
@@ -33,8 +32,6 @@ router.post('/logout', (req, res) => {
   res.redirect('/')
 })
 
-router.get('/me', (req, res) => {
-  res.json(req.user)
+router.get('/me', adminGatekeeper, (req, res) => {
+  res.json(req.admin)
 })
-
-router.use('/google', require('./google'))

@@ -1,33 +1,23 @@
-const BoxItem = require('./boxItem')
+const ProductPerOrder = require('./productPerOrder')
 const Category = require('./category')
 const Order = require('./order')
 const Product = require('./product')
-const Review = require('./review')
-const User = require('./user')
+const Admin = require('./admin')
 /**
  * Associations
  */
 
-Review.belongsTo(User, {foreignKey: 'user_id'});
-User.hasMany(Review, {foreignKey: 'user_id'});
+ProductPerOrder.belongsTo(Product, {foreignKey: 'productPerOrder_id'});
+Product.hasMany(ProductPerOrder, {foreignKey: 'product_id'});
 
-Review.belongsTo(Product, {foreignKey: 'product_id'});
-Product.hasMany(Review, {foreignKey: 'product_id'});
-
-Order.belongsTo(User, {foreignKey: 'user_id'});
-User.hasMany(Order, {foreignKey: 'user_id'});
-
-BoxItem.belongsTo(Product, {foreignKey: 'boxItem_id'});
-Product.hasMany(BoxItem, {foreignKey: 'product_id'});
-
-BoxItem.belongsTo(Order, {foreignKey: 'boxItem_id'});
-Order.hasMany(BoxItem, {foreignKey: 'order_id'});
+ProductPerOrder.belongsTo(Order, {foreignKey: 'productPerOrder_id'});
+Order.hasMany(ProductPerOrder, {foreignKey: 'order_id'});
 
 
-Category.belongsToMany(Product, {through: 'product_category', foreignKey: 'category_id'});
-Product.belongsToMany(Category, {through: 'product_category', foreignKey: 'product_id'});
+Category.hasMany(Product, {foreignKey: 'category_id'});
+Product.belongsTo(Category, {foreignKey: 'product_id'});
 
 
 module.exports = {
-  User, Review, Product, Order, Category, BoxItem
+  Admin, Product, Order, Category, ProductPerOrder
 }
